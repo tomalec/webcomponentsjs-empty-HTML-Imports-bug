@@ -1,0 +1,31 @@
+<title>webcomponentsjs-empty-HTML-Imports-bug</title>
+<script src="https://cdn.jsdelivr.net/webcomponentsjs/0.7.22/webcomponents.min.js"></script>
+
+<body>
+    <p>
+        Here goes the script that appends <code>&lt;link rel="import" href="empty-200.html"&gt;</code> and attaches the <code>.onload</code> callback to it.
+        The callback should be executed once (empty) document is loaded.
+    </p>
+    <p>
+        You should see two alerts: first on page load, second once document is loaded
+    </p>
+    <p>
+        Works fine with native HTML Imports support (Chrome), but fails with polyfill (FF, IE, Safari).
+    </p>
+    <script>
+        (function () {
+
+            var link = document.createElement('link');
+            link.rel = "import";
+            link.href = 'empty-200.html';
+            alert('HTML Import attached, you should see onload callback soon')
+            link.onload = function processImportedDocument() {
+                alert('yey! it works!');
+            };
+            document.head.appendChild(link);
+        })();
+    </script>
+
+</body>
+
+</html>
